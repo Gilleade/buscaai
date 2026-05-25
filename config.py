@@ -43,6 +43,7 @@ DEPARTMENT_OPTIONS = [
 OLLAMA_MODEL = "qwen3:4b-instruct"
 OLLAMA_API_URL = "http://localhost:11434/api/chat"
 OLLAMA_TIMEOUT_SECONDS = 120
+OLLAMA_KEEP_ALIVE = "15m"
 
 OLLAMA_OPTIONS = {
     "temperature": 0.1,

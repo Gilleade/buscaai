@@ -17,6 +17,24 @@
         "padronização"
       ],
       "created_at": "2026-05-25T15:18:14"
+    },
+    {
+      "id": "LL-0002",
+      "title": "Etiquetas para localizar materiais em estoque",
+      "department": "Estoque",
+      "process": "Separação de materiais",
+      "problem_description": "Materiais armazenados sem identificação adequada causavam atrasos durante a separação.",
+      "identified_cause": "Ausência de etiquetas padronizadas nas prateleiras e embalagens.",
+      "implemented_solution": "Foram instaladas etiquetas por categoria e código de material.",
+      "observed_result": "O tempo de localização dos materiais foi reduzido nas separações seguintes.",
+      "keywords": [
+        "estoque",
+        "etiquetas",
+        "separação",
+        "materiais",
+        "atraso"
+      ],
+      "created_at": "2026-05-25T15:32:43"
     }
   ]
 }

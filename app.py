@@ -12,7 +12,7 @@ from config import (
     PAGE_ICON,
     REGISTER_PAGE_LABEL,
 )
-from services import RecordService
+from services import OllamaService, RecordService
 from views import render_consult_view, render_register_view
 
 
@@ -25,6 +25,7 @@ def main() -> None:
     )
 
     record_service = RecordService()
+    ollama_service = OllamaService()
 
     st.sidebar.title(APP_NAME)
     st.sidebar.caption("Consulta a Lições Aprendidas")
@@ -40,7 +41,7 @@ def main() -> None:
     if selected_page == CONSULT_PAGE_LABEL:
         st.write(APP_DESCRIPTION)
         st.divider()
-        render_consult_view(record_service)
+        render_consult_view(record_service, ollama_service)
     else:
         render_register_view(record_service)
 
