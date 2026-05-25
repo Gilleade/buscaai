@@ -3,38 +3,79 @@
   "records": [
     {
       "id": "LL-0001",
-      "title": "Checklist para evitar retrabalho na montagem",
+      "title": "Controle de torque na fixação de mancais de conjunto rotativo",
       "department": "Produção",
-      "process": "Montagem de componentes",
-      "problem_description": "Componentes foram instalados fora da sequência correta, gerando desmontagem e retrabalho.",
-      "identified_cause": "Ausência de uma orientação visual padronizada para indicar a sequência correta da montagem.",
-      "implemented_solution": "Foi criado um checklist visual com a sequência correta de instalação dos componentes.",
-      "observed_result": "As montagens seguintes apresentaram redução nos erros de sequência e no retrabalho.",
+      "process": "Montagem de conjunto rotativo",
+      "problem_description": "Durante o teste funcional de conjuntos rotativos, algumas unidades apresentaram vibração acima do esperado. Na verificação da montagem, foi identificado que os parafusos de fixação dos mancais haviam sido apertados com esforços diferentes entre os operadores, exigindo desmontagem e nova montagem do conjunto.",
+      "identified_cause": "A estação de montagem não possuía instrução definida para o torque de aperto nem uma sequência padronizada de fixação dos parafusos dos mancais.",
+      "implemented_solution": "Foi criada uma instrução operacional com o torque especificado para a fixação dos mancais, a sequência cruzada de aperto e a utilização obrigatória de torquímetro calibrado antes da liberação do conjunto para teste.",
+      "observed_result": "Nos conjuntos acompanhados após a implantação da instrução, não foram identificadas novas devoluções para retrabalho motivadas por aperto irregular dos mancais durante o teste funcional.",
       "keywords": [
-        "montagem",
-        "retrabalho",
-        "checklist",
-        "padronização"
+        "mancal",
+        "torque",
+        "torquímetro",
+        "conjunto rotativo",
+        "vibração",
+        "aperto"
       ],
-      "created_at": "2026-05-25T15:18:14"
+      "created_at": "2026-05-25T14:10:00"
     },
     {
       "id": "LL-0002",
-      "title": "Etiquetas para localizar materiais em estoque",
-      "department": "Estoque",
-      "process": "Separação de materiais",
-      "problem_description": "Materiais armazenados sem identificação adequada causavam atrasos durante a separação.",
-      "identified_cause": "Ausência de etiquetas padronizadas nas prateleiras e embalagens.",
-      "implemented_solution": "Foram instaladas etiquetas por categoria e código de material.",
-      "observed_result": "O tempo de localização dos materiais foi reduzido nas separações seguintes.",
+      "title": "Iluminação controlada para inspeção visual de pintura industrial",
+      "department": "Qualidade",
+      "process": "Inspeção final de acabamento superficial",
+      "problem_description": "Peças pintadas recebiam avaliações divergentes durante a inspeção final. Pequenas bolhas, escorrimentos e variações aparentes de acabamento eram percebidos por alguns inspetores e não por outros, gerando reinspeções e discussões sobre aceitação das peças.",
+      "identified_cause": "A inspeção visual era realizada em locais com níveis e tonalidades de iluminação diferentes, sem referência visual padronizada para comparar defeitos de acabamento superficial.",
+      "implemented_solution": "Foi definido um ponto fixo de inspeção com iluminação LED padronizada e disponibilizado um catálogo fotográfico contendo exemplos de acabamento aceitável, bolhas, escorrimentos e outras não conformidades de pintura.",
+      "observed_result": "Após a adoção do posto padronizado, as avaliações de acabamento tornaram-se mais consistentes e as solicitações de reinspeção por divergência visual foram reduzidas.",
       "keywords": [
-        "estoque",
-        "etiquetas",
-        "separação",
-        "materiais",
-        "atraso"
+        "pintura",
+        "acabamento",
+        "inspeção visual",
+        "iluminação",
+        "bolhas",
+        "escorrimento"
       ],
-      "created_at": "2026-05-25T15:32:43"
+      "created_at": "2026-05-25T14:20:00"
+    },
+    {
+      "id": "LL-0003",
+      "title": "Conferência por código de barras na expedição de kits de reposição",
+      "department": "Logística",
+      "process": "Expedição de kits de reposição",
+      "problem_description": "Um kit de reposição foi separado com um componente pertencente a outro pedido porque duas embalagens apresentavam aparência semelhante. A divergência foi percebida somente após a preparação da remessa, gerando reabertura da caixa e atraso na expedição.",
+      "identified_cause": "A conferência final era realizada apenas pela descrição visual das embalagens e pela leitura manual da lista de separação, sem validação automática entre o pedido e os itens incluídos no kit.",
+      "implemented_solution": "Foi implantada uma conferência por leitura de código de barras antes do fechamento da caixa. O código de cada componente passou a ser comparado com a lista prevista para o pedido correspondente.",
+      "observed_result": "Após a implantação, componentes divergentes passaram a ser identificados antes do fechamento das caixas, evitando o envio de kits com itens incorretos nos acompanhamentos realizados.",
+      "keywords": [
+        "expedição",
+        "kit de reposição",
+        "código de barras",
+        "pedido",
+        "embalagem",
+        "conferência"
+      ],
+      "created_at": "2026-05-25T14:30:00"
+    },
+    {
+      "id": "LL-0004",
+      "title": "Inspeção preventiva do filtro de retorno de prensa hidráulica",
+      "department": "Manutenção",
+      "process": "Diagnóstico de prensa hidráulica",
+      "problem_description": "Uma prensa hidráulica apresentou paradas intermitentes e dificuldade para atingir a pressão necessária durante o ciclo de conformação. A ocorrência interrompia a operação e exigia diagnóstico da equipe de manutenção.",
+      "identified_cause": "Foi identificado acúmulo de contaminantes no filtro de retorno do óleo hidráulico, restringindo o fluxo do fluido e prejudicando a estabilidade da pressão de operação.",
+      "implemented_solution": "O filtro saturado foi substituído e o plano de manutenção preventiva passou a incluir verificação periódica da queda de pressão no circuito de retorno e intervalo definido para inspeção do elemento filtrante.",
+      "observed_result": "Após a intervenção, a prensa voltou a atingir a pressão de trabalho de forma estável e não apresentou nova parada associada à obstrução do filtro durante os ciclos monitorados.",
+      "keywords": [
+        "prensa hidráulica",
+        "pressão",
+        "filtro de retorno",
+        "óleo hidráulico",
+        "manutenção preventiva",
+        "parada"
+      ],
+      "created_at": "2026-05-25T14:40:00"
     }
   ]
 }
