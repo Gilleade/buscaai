@@ -1,4 +1,22 @@
 {
   "schema_version": "1.0",
-  "records": []
+  "records": [
+    {
+      "id": "LL-0001",
+      "title": "Checklist para evitar retrabalho na montagem",
+      "department": "Produção",
+      "process": "Montagem de componentes",
+      "problem_description": "Componentes foram instalados fora da sequência correta, gerando desmontagem e retrabalho.",
+      "identified_cause": "Ausência de uma orientação visual padronizada para indicar a sequência correta da montagem.",
+      "implemented_solution": "Foi criado um checklist visual com a sequência correta de instalação dos componentes.",
+      "observed_result": "As montagens seguintes apresentaram redução nos erros de sequência e no retrabalho.",
+      "keywords": [
+        "montagem",
+        "retrabalho",
+        "checklist",
+        "padronização"
+      ],
+      "created_at": "2026-05-25T15:18:14"
+    }
+  ]
 }
