@@ -35,7 +35,6 @@ DEPARTMENT_OPTIONS = [
     "Logística",
     "Engenharia",
     "Administrativo",
-    "Outro",
 ]
 
 

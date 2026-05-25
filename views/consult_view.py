@@ -5,9 +5,42 @@ from __future__ import annotations
 import streamlit as st
 
 from services import OllamaService, OllamaServiceError, RecordService
+from styles import render_page_header
 
 
 CHAT_HISTORY_KEY = "consultation_messages"
+
+
+def clear_conversation() -> None:
+    """Clear the visible consultation history stored in the current session."""
+    st.session_state[CHAT_HISTORY_KEY] = []
+
+
+def render_chat_composer(messages: list[dict[str, str]]) -> str | None:
+    """Render the fixed bottom composer with a clear button and chat input."""
+    with st.bottom:
+        with st.container(key="chat_composer"):
+            clear_column, prompt_column = st.columns(
+                [0.65, 9.35],
+                vertical_alignment="bottom",
+                gap="small",
+            )
+
+            with clear_column:
+                st.button(
+                    "🗑️",
+                    key="clear_conversation_button",
+                    help="Limpar conversa",
+                    use_container_width=True,
+                    disabled=not messages,
+                    on_click=clear_conversation,
+                )
+
+            with prompt_column:
+                return st.chat_input(
+                    "Descreva o problema encontrado ou consulte uma solução anterior...",
+                    key="consultation_prompt",
+                )
 
 
 def render_consult_view(
@@ -15,34 +48,41 @@ def render_consult_view(
     ollama_service: OllamaService,
 ) -> None:
     """Render the consultation chat interface."""
-    st.header("Consultar conhecimento")
-
-    st.write(
-        "Descreva um problema ou situação para localizar experiências "
-        "anteriormente registradas."
-    )
-
     records = record_service.list_records()
-
-    st.caption(f"Registros disponíveis na base local: {len(records)}")
 
     if CHAT_HISTORY_KEY not in st.session_state:
         st.session_state[CHAT_HISTORY_KEY] = []
 
     messages: list[dict[str, str]] = st.session_state[CHAT_HISTORY_KEY]
 
+    render_page_header(
+        eyebrow="Consulta assistida",
+        title="Encontre experiências já documentadas.",
+        description=(
+            "Descreva a situação encontrada e o BuscaAI consultará somente "
+            "as lições aprendidas registradas na base local."
+        ),
+    )
+
+    st.markdown(
+        f"""
+        <div class="buscaai-status-pill">
+            <span class="buscaai-status-dot"></span>
+            {len(records)} registros disponíveis para consulta
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
     for message in messages:
         with st.chat_message(message["role"]):
             st.markdown(message["content"])
 
-    question = st.chat_input(
-        "Descreva o problema encontrado ou pergunte por uma solução anterior..."
-    )
+    question = render_chat_composer(messages)
 
     if not question:
         return
-
-    previous_messages = list(messages)
 
     messages.append(
         {
@@ -55,12 +95,11 @@ def render_consult_view(
         st.markdown(question)
 
     with st.chat_message("assistant"):
-        with st.spinner("Consultando conhecimentos registrados..."):
+        with st.spinner("Consultando a base de lições aprendidas..."):
             try:
                 answer = ollama_service.consult(
                     question=question,
                     records=records,
-                    conversation=previous_messages,
                 )
             except (OllamaServiceError, ValueError) as error:
                 answer = str(error)

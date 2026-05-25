@@ -6,23 +6,29 @@ import streamlit as st
 
 from config import DEPARTMENT_OPTIONS
 from services import RecordService
+from styles import render_page_header
 
 
 def render_register_view(record_service: RecordService) -> None:
     """Render the form responsible for registering a new record."""
-    st.header("Registrar conhecimento")
-
-    st.write(
-        "Registre uma solução já aplicada para que ela possa ser "
-        "consultada futuramente pelo BuscaAI."
+    render_page_header(
+        eyebrow="Registro de experiência",
+        title="Documente uma nova lição aprendida.",
+        description=(
+            "Registre uma solução efetivamente aplicada para que ela passe "
+            "a fazer parte da base consultável do BuscaAI."
+        ),
     )
 
     with st.form("register_record_form", clear_on_submit=True):
-        st.subheader("Identificação")
+        st.markdown(
+            '<div class="buscaai-section-title">Identificação</div>',
+            unsafe_allow_html=True,
+        )
 
         title = st.text_input(
             "Título do conhecimento",
-            placeholder="Ex.: Checklist para evitar retrabalho na montagem",
+            placeholder="Ex.: Controle de torque na fixação de mancais",
         )
 
         department = st.selectbox(
@@ -30,52 +36,52 @@ def render_register_view(record_service: RecordService) -> None:
             options=DEPARTMENT_OPTIONS,
         )
 
-        custom_department = ""
-
-        if department == "Outro":
-            custom_department = st.text_input(
-                "Informe a área / setor",
-                placeholder="Ex.: Compras",
-            )
-
         process = st.text_input(
             "Processo ou atividade",
-            placeholder="Ex.: Montagem de componentes",
+            placeholder="Ex.: Montagem de conjunto rotativo",
         )
 
-        st.subheader("Contexto do problema")
+        st.markdown(
+            '<div class="buscaai-section-title">Contexto do problema</div>',
+            unsafe_allow_html=True,
+        )
 
         problem_description = st.text_area(
             "Descrição do problema",
-            placeholder=(
-                "Descreva a situação que ocorreu e o impacto observado."
-            ),
-            height=110,
+            placeholder="Descreva a ocorrência e seu impacto no processo.",
+            height=115,
         )
 
         identified_cause = st.text_area(
             "Causa identificada",
-            placeholder="Descreva a causa ou fator que contribuiu para o problema.",
-            height=100,
+            placeholder="Informe a causa observada após a análise da ocorrência.",
+            height=105,
         )
 
-        st.subheader("Conhecimento aplicado")
+        st.markdown(
+            '<div class="buscaai-section-title">Conhecimento aplicado</div>',
+            unsafe_allow_html=True,
+        )
 
         implemented_solution = st.text_area(
             "Solução aplicada",
-            placeholder="Descreva a ação que foi efetivamente utilizada.",
-            height=110,
+            placeholder="Descreva a ação efetivamente utilizada para tratar o problema.",
+            height=115,
         )
 
         observed_result = st.text_area(
             "Resultado observado",
-            placeholder="Descreva o resultado obtido após aplicar a solução.",
-            height=100,
+            placeholder="Descreva os resultados verificados após a aplicação.",
+            height=105,
         )
 
         keywords = st.text_input(
             "Palavras-chave (opcional)",
-            placeholder="Ex.: montagem, retrabalho, checklist",
+            placeholder="Ex.: mancal, torque, torquímetro, vibração",
+            help=(
+                "As palavras-chave auxiliam a organização do registro, "
+                "mas a consulta também considera o texto completo."
+            ),
         )
 
         submitted = st.form_submit_button(
@@ -87,14 +93,10 @@ def render_register_view(record_service: RecordService) -> None:
     if not submitted:
         return
 
-    selected_department = (
-        custom_department if department == "Outro" else department
-    )
-
     try:
         record = record_service.register_record(
             title=title,
-            department=selected_department,
+            department=department,
             process=process,
             problem_description=problem_description,
             identified_cause=identified_cause,
@@ -107,7 +109,9 @@ def render_register_view(record_service: RecordService) -> None:
         return
 
     st.success("Conhecimento registrado com sucesso.")
-    st.write(f"**Identificador:** {record.id}")
-    st.info(
-        "Este registro já está disponível para consulta no BuscaAI."
+    st.markdown(
+        f"""
+        **Identificador gerado:** `{record.id}`  
+        Este registro já pode ser localizado pela consulta inteligente.
+        """
     )
